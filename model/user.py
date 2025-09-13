@@ -1,28 +1,19 @@
-from pydantic import BaseModel, BeforeValidator, Field, field_serializer
-from sqlalchemy import BigInteger, String, Text
+from pydantic import BeforeValidator, Field, field_serializer
+from sqlalchemy import String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from typing import Annotated, Union
 
-from db import Base
-from snowflake import SnowflakeID
-
-from .base import SQLIDModelBase
+from .base import IdBase, IdBaseModel
 
 StrToBytesValidator = BeforeValidator(
     lambda v: v.encode("utf-8") if isinstance(v, str) else v
 )
 
 
-class UserModel(Base):
+class UserModel(IdBase):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(
-        BigInteger,
-        primary_key=True,
-        unique=True,
-        nullable=False
-    )
     username: Mapped[str] = mapped_column(
         Text,
         unique=True,
@@ -43,9 +34,7 @@ class UserModel(Base):
     )
 
 
-class User(SQLIDModelBase[UserModel]):
-    __model_type__ = UserModel
-
+class User(IdBaseModel[UserModel]):
     username: str = Field(
         title="Username",
         description="The unique username of the user.",
