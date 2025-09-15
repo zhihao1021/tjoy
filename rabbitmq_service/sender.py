@@ -2,7 +2,7 @@ import os
 import asyncio
 from aio_pika import connect_robust, Message, DeliveryMode
 
-# remember to change localhost to right RabbitMQ host
+# TODO: remember to change localhost to right RabbitMQ host
 RABBITMQ_URL = os.getenv("RABBITMQ_URL", "amqp://guest:guest@localhost/")
 RABBITMQ_QUEUE_NAME = os.getenv("QUEUE_NAME", "matchmaking-queue")
 
