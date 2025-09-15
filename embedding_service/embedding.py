@@ -13,12 +13,12 @@ class ActivityRecommendationSystemGemma:
         self.device = device
         self.model = None
         self.tokenizer = None
-        self.user_data = None  # 單一使用者資料
+        self.user_data = None  # Single user data
         self.events_data = {}
         self.user_embedding = None
         self.event_embeddings = {}
         
-        # 權重設定
+        # Weight settings
         self.weights = {
             'interest_tags': 0.3,
             'subscribed_boards': 0.2,
@@ -75,42 +75,42 @@ class ActivityRecommendationSystemGemma:
             return embedding
             
         except Exception as e:
-            print(f"Error：{e}")
+            print(f"Error: {e}")
             raise
     
     def set_user(self, user_model: UserModel):
         """
-        設定使用者資料
+        Set user data
         
         Args:
-            user_model: UserModel 實例
+            user_model: UserModel instance
         """
         self.user_data = user_model
-        self.user_embedding = None  # 重置使用者嵌入向量
+        self.user_embedding = None  # Reset user embedding vector
         
     def add_event_data(self, event_id: str, article_model: ArticleModel):
         """
-        新增活動資料
+        Add event data
         
         Args:
-            event_id: 活動ID
-            article_model: ArticleModel 實例 (is_event=True)
+            event_id: Event ID
+            article_model: ArticleModel instance (is_event=True)
         """
         if not article_model.is_event:
-            raise ValueError("ArticleModel 必須是活動 (is_event=True)")
+            raise ValueError("ArticleModel must be an event (is_event=True)")
         self.events_data[event_id] = article_model
     
     def create_user_profile_embedding(self) -> np.ndarray:
         """
-        為使用者創建綜合檔案向量
+        Create comprehensive profile vector for user
         
         Returns:
-            使用者的綜合向量表示
+            User's comprehensive vector representation
         """
         if self.user_data is None:
-            raise ValueError("使用者資料尚未設定，請先調用 set_user()")
+            raise ValueError("User data not set, please call set_user() first")
         
-        # 如果已經計算過，直接回傳快取的結果
+        # If already calculated, return cached result directly
         if self.user_embedding is not None:
             return self.user_embedding
         
@@ -159,7 +159,7 @@ class ActivityRecommendationSystemGemma:
         # Convert to vector
         embedding = self.get_embedding(combined_text)
         
-        # 快取結果
+        # Cache result
         self.user_embedding = embedding
         return embedding
     
@@ -208,7 +208,6 @@ class ActivityRecommendationSystemGemma:
         return embedding
     
     def calculate_content_similarity(self, event_id: str) -> float:
-        start_time = time.time()
         
         user_embedding = self.create_user_profile_embedding()
         event_embedding = self.create_event_embedding(event_id)
@@ -354,19 +353,19 @@ class ActivityRecommendationSystemGemma:
     
     def recommend_events(self, top_k: int = 5) -> List[str]:
         """
-        推薦活動，回傳活動 ID 列表
+        Recommend events, return event ID list
         
         Args:
-            top_k: 回傳前 k 個推薦活動
+            top_k: Return top k recommended events
             
         Returns:
-            活動 ID 列表，按推薦分數排序
+            Event ID list, sorted by recommendation score
         """
         if self.user_data is None:
-            raise ValueError("使用者資料尚未設定，請先調用 set_user()")
+            raise ValueError("User data not set, please call set_user() first")
         
         if not self.events_data:
-            raise ValueError("沒有可推薦的活動資料")
+            raise ValueError("No event data available for recommendation")
         
         recommendations = []
         
@@ -377,27 +376,27 @@ class ActivityRecommendationSystemGemma:
         # Sort by total score
         recommendations.sort(key=lambda x: x[1], reverse=True)
         
-        # 回傳活動 ID 列表
+        # Return event ID list
         return [event_id for event_id, _ in recommendations[:top_k]]
 
 def main():
     """Main program - Demonstrate EmbeddingGemma recommendation system usage"""
     
-    # 創建推薦系統實例
+    # Create recommendation system instance
     recommendation_system = ActivityRecommendationSystemGemma()
     
-    # 載入模型
+    # Load model
     recommendation_system.load_model()
     
-    print("\n=== EmbeddingGemma 活動推薦系統示範 ===\n")
-    print("請使用 set_user() 和 add_event_data() 方法設定使用者和活動資料")
-    print("範例:")
+    print("\n=== EmbeddingGemma Activity Recommendation System Demo ===\n")
+    print("Please use set_user() and add_event_data() methods to set user and event data")
+    print("Example:")
     print("  recommendation_system.set_user(user_model_instance)")
     print("  recommendation_system.add_event_data('event_1', article_model_instance)")
     print("  event_ids = recommendation_system.recommend_events(top_k=5)")
-    print("  # event_ids 會是活動 ID 的列表，例如: ['event_1', 'event_3', 'event_2']")
+    print("  # event_ids will be a list of event IDs, e.g.: ['event_1', 'event_3', 'event_2']")
     
-    print("\n推薦系統已準備就緒！")
+    print("\nRecommendation system is ready!")
 
 
 if __name__ == "__main__":
