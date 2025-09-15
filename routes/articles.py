@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Query
+from rabbitmq_service.sender import send_message_to_rabbitmq 
 
 from typing import Annotated, Literal, Optional
 
@@ -33,7 +34,9 @@ async def get_article(article_id: int):
     description="Create a new article."
 )
 async def create_article():
-    pass
+    # TODO: Check Activity or pure Article
+    # TODO: send activity_id to RabbitMQ
+    await send_message_to_rabbitmq(insert_activity_id_here)
 
 
 @router.put(
