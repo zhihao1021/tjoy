@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
 
 from db import SessionDep
+from exceptions.user_not_found import USER_NOT_FOUND
 from model.user import User, UserModel
 from schemas.auth import Jwt, LoginData, RegisterData
 from snowflake import SnowflakeGenerator
@@ -56,10 +57,7 @@ async def login(session: SessionDep, data: LoginData) -> Jwt:
     ))).first()
 
     if result is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found."
-        )
+        raise USER_NOT_FOUND
 
     user_id, password = result
 

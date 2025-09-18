@@ -1,5 +1,12 @@
 from pydantic import BaseModel, Field
 
+from typing import Literal
+
+
+class Jwt(BaseModel):
+    token_type: Literal["Bearer"] = "Bearer"
+    access_token: str
+
 
 class LoginData(BaseModel):
     username: str = Field(
@@ -29,6 +36,11 @@ class RegisterData(BaseModel):
         title="Gender",
         description="The gender of the user.",
         examples=["Female"]
+    )
+    department: str = Field(
+        title="Department",
+        description="The department the user belongs to.",
+        examples=["Computer Science"]
     )
     password: str = Field(
         title="Password",
