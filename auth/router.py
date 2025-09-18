@@ -3,12 +3,12 @@ from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
 
 from db import SessionDep
-from exceptions.user_not_found import USER_NOT_FOUND
+from exceptions.user import USER_NOT_FOUND
 from model.user import User, UserModel
 from schemas.auth import Jwt, LoginData, RegisterData
 from snowflake import SnowflakeGenerator
 
-from .utils import sign_jwt
+from .utils import sign_jwt, UserIdDep
 
 router = APIRouter(
     prefix="/auth"
@@ -18,7 +18,7 @@ id_generator = SnowflakeGenerator()
 
 
 @router.post("/register")
-async def register(session: SessionDep, data: RegisterData):
+async def register(session: SessionDep, data: RegisterData) -> Jwt:
     salt = gensalt()
     hashed_password = hashpw(
         data.password.encode("utf-8"),
@@ -66,6 +66,13 @@ async def login(session: SessionDep, data: LoginData) -> Jwt:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect password."
         )
+    token = sign_jwt(user_id)
+
+    return Jwt(access_token=token)
+
+
+@router.put("/refresh")
+def refresh_token(user_id: UserIdDep) -> Jwt:
     token = sign_jwt(user_id)
 
     return Jwt(access_token=token)
