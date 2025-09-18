@@ -1,8 +1,8 @@
 from pydantic import BaseModel
-from sqlalchemy import ColumnElement, select, Row
+from sqlalchemy import ColumnElement, Row, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from typing import Optional, Self, Union
+from typing import Optional, Self
 
 from snowflake import SnowflakeID
 
