@@ -351,15 +351,15 @@ class ActivityRecommendationSystemGemma:
         
         return scores
     
-    def recommend_events(self, top_k: int = 5) -> List[str]:
+    def recommend_events(self, min_score: float = 0.4) -> List[ArticleModel]:
         """
-        Recommend events, return event ID list
+        Recommend events with score above threshold, return event model list
         
         Args:
-            top_k: Return top k recommended events
+            min_score: Minimum score threshold for recommendation
             
         Returns:
-            Event ID list, sorted by recommendation score
+            Event model list with scores above threshold, sorted by recommendation score
         """
         if self.user_data is None:
             raise ValueError("User data not set, please call set_user() first")
@@ -371,13 +371,14 @@ class ActivityRecommendationSystemGemma:
         
         for event_id in self.events_data.keys():
             scores = self.calculate_comprehensive_score(event_id)
-            recommendations.append((event_id, scores['total_score']))
+            if scores['total_score'] > min_score:
+                recommendations.append((event_id, scores['total_score']))
         
-        # Sort by total score
+        # Sort by total score (descending)
         recommendations.sort(key=lambda x: x[1], reverse=True)
         
-        # Return event ID list
-        return [event_id for event_id, _ in recommendations[:top_k]]
+        # Return event model list
+        return [self.events_data[event_id] for event_id, _ in recommendations]
 
 def main():
     """Main program - Demonstrate EmbeddingGemma recommendation system usage"""
