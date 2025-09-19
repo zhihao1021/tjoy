@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import BigInteger
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from typing import cast, Generic, TypeVar
+from typing import cast, Generic, Self, TypeVar
 from types import get_original_bases
 
 from db import Base
@@ -24,6 +24,10 @@ class IdBase(Base):
 
 
 class SQLBaseModel(BaseModel, Generic[T]):
+    @classmethod
+    def from_model(cls, model: T) -> Self:
+        return cls.model_validate(model)
+
     def to_model(self) -> T:
         sql_model = None
 

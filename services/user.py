@@ -10,7 +10,7 @@ from exceptions.user import (
     USER_UPDATE_FAILED,
 )
 from model import UserModel
-from model.view import UserInfo
+from model.view import UserView
 from schemas.user import UserUpdate
 from snowflake import SnowflakeID
 
@@ -18,9 +18,9 @@ from snowflake import SnowflakeID
 async def get_user_by_id(
     user_id: Union[int, SnowflakeID],
     session: Optional[AsyncSession] = None
-) -> UserInfo:
+) -> UserView:
     async with get_session(session) as session:
-        result = await UserInfo.query_by(
+        result = await UserView.query_by(
             session,
             UserModel.id == user_id
         )
@@ -65,9 +65,9 @@ async def update_user_by_id(
 async def get_user_by_username(
     username: str,
     session: Optional[AsyncSession] = None
-) -> UserInfo:
+) -> UserView:
     async with get_session(session) as session:
-        result = await UserInfo.query_by(
+        result = await UserView.query_by(
             session,
             UserModel.username == username
         )

@@ -1,14 +1,8 @@
-from pydantic import BeforeValidator, Field, field_serializer
-from sqlalchemy import ForeignKey, String, Text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from typing import Annotated, TYPE_CHECKING, Union
+from pydantic import Field
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import IdBase, IdBaseModel
-
-if TYPE_CHECKING:
-    from .article import ArticleModel
-    from .user import UserModel
 
 
 class ArticleHistoryModel(IdBase):
@@ -23,4 +17,15 @@ class ArticleHistoryModel(IdBase):
         ForeignKey("articles.id"),
         nullable=False,
         index=True
+    )
+
+
+class ArticleHistory(IdBaseModel[ArticleHistoryModel]):
+    user_id: int = Field(
+        title="User ID",
+        description="ID of the user who viewed the article.",
+    )
+    article_id: int = Field(
+        title="Article ID",
+        description="ID of the article that was viewed.",
     )

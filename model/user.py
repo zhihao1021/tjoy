@@ -14,11 +14,11 @@ from .relationships import (
 )
 
 if TYPE_CHECKING:
-    from .article import ArticleModel
-    from .category import CategoryModel
-    from .conversation import ConversationModel
-    from .comment import CommentModel
-    from .search_history import SearchHistoryModel
+    from .article import Article, ArticleModel
+    from .category import Category, CategoryModel
+    from .conversation import Conversation, ConversationModel
+    from .comment import Comment, CommentModel
+    from .search_history import SearchHistory, SearchHistoryModel
 
 StrToBytesValidator = BeforeValidator(
     lambda v: v.encode("utf-8") if isinstance(v, str) else v
@@ -114,10 +114,64 @@ class User(IdBaseModel[UserModel]):
         description="The gender of the user.",
         examples=["Female"]
     )
+    department: str = Field(
+        title="Department",
+        description="The department the user belongs to.",
+        examples=["Computer Science"]
+    )
+
     password_hash: Annotated[Union[bytes, str], StrToBytesValidator] = Field(
         title="Password",
         description="The password for the user account.",
         examples=["strongpassword123"],
+    )
+
+    articles: list["Article"] = Field(
+        default_factory=list,
+        title="Articles",
+        description="List of articles authored by the user.",
+    )
+
+    comments: list["Comment"] = Field(
+        default_factory=list,
+        title="Comments",
+        description="List of comments authored by the user.",
+    )
+
+    interest_articles: list["Article"] = Field(
+        default_factory=list,
+        title="Interest Articles",
+        description="List of articles the user is interested in.",
+    )
+    join_events: list["Article"] = Field(
+        default_factory=list,
+        title="Join Events",
+        description="List of events the user has joined.",
+    )
+    follow_categories: list["Category"] = Field(
+        default_factory=list,
+        title="Follow Categories",
+        description="List of categories the user follows.",
+    )
+    conversations: list["Conversation"] = Field(
+        default_factory=list,
+        title="Conversations",
+        description="List of conversations the user is part of.",
+    )
+    search_histories: list["SearchHistory"] = Field(
+        default_factory=list,
+        title="Search Histories",
+        description="List of search histories of the user.",
+    )
+    article_histories: list["Article"] = Field(
+        default_factory=list,
+        title="Article Histories",
+        description="List of articles the user has viewed.",
+    )
+    friends: list["User"] = Field(
+        default_factory=list,
+        title="Friends",
+        description="List of friends of the user.",
     )
 
     @field_serializer("password_hash")

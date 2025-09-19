@@ -1,6 +1,8 @@
 from bcrypt import checkpw, gensalt, hashpw
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Body, HTTPException, status
 from sqlalchemy import select
+
+from typing import Annotated
 
 from db import SessionDep
 from exceptions.user import USER_NOT_FOUND
@@ -15,6 +17,24 @@ router = APIRouter(
 )
 
 id_generator = SnowflakeGenerator()
+
+
+@router.post(
+    path="/pre-check",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+async def pre_check(session: SessionDep, username: Annotated[str, Body(embed=True)]) -> None:
+    result = (await session.execute(select(
+        UserModel.id
+    ).where(
+        UserModel.username == username
+    ))).first()
+
+    if result is not None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already taken."
+        )
 
 
 @router.post("/register")

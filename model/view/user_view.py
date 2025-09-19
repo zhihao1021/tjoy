@@ -9,7 +9,7 @@ from snowflake import SnowflakeID
 from ..user import UserModel
 
 
-class UserInfo(BaseModel):
+class UserView(BaseModel):
     id: SnowflakeID
     username: str
     display_name: str

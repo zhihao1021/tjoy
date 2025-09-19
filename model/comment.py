@@ -1,14 +1,14 @@
-from pydantic import BeforeValidator, Field, field_serializer
-from sqlalchemy import Boolean, ForeignKey, Integer, Text
+from pydantic import Field
+from sqlalchemy import ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from .base import IdBase, IdBaseModel
 
 if TYPE_CHECKING:
-    from .article import ArticleModel
-    from .user import UserModel
+    from .article import Article, ArticleModel
+    from .user import User, UserModel
 
 
 class CommentModel(IdBase):
@@ -37,4 +37,30 @@ class CommentModel(IdBase):
     content: Mapped[str] = mapped_column(
         Text,
         nullable=False,
+    )
+
+
+class Comment(IdBaseModel[CommentModel]):
+    article_id: int = Field(
+        title="Article ID",
+        description="ID of the article the comment belongs to.",
+    )
+    article: "Article" = Field(
+        title="Article",
+        description="The article the comment belongs to.",
+    )
+
+    author_id: int = Field(
+        title="Author ID",
+        description="ID of the user who authored the comment.",
+    )
+    author: "User" = Field(
+        title="Author",
+        description="The user who authored the comment.",
+    )
+
+    content: str = Field(
+        title="Content",
+        description="The content of the comment.",
+        examples=["Great article!", "I totally agree with this."],
     )

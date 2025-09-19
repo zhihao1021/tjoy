@@ -1,13 +1,13 @@
-from pydantic import BeforeValidator, Field, field_serializer
-from sqlalchemy import ForeignKey, String, Text
+from pydantic import Field
+from sqlalchemy import ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from typing import Annotated, TYPE_CHECKING, Union
+from typing import TYPE_CHECKING
 
 from .base import IdBase, IdBaseModel
 
 if TYPE_CHECKING:
-    from .user import UserModel
+    from .user import User, UserModel
 
 
 class SearchHistoryModel(IdBase):
@@ -26,4 +26,20 @@ class SearchHistoryModel(IdBase):
     user: Mapped["UserModel"] = relationship(
         back_populates="search_histories",
         lazy=True,
+    )
+
+
+class SearchHistory(IdBaseModel[SearchHistoryModel]):
+    query: str = Field(
+        title="Search Query",
+        description="The search query string.",
+    )
+
+    user_id: int = Field(
+        title="User ID",
+        description="ID of the user who made the search.",
+    )
+    user: "User" = Field(
+        title="User",
+        description="The user who made the search.",
     )

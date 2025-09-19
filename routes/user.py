@@ -3,7 +3,7 @@ from fastapi import APIRouter, status
 from auth import UserIdDep
 from db import SessionDep
 from exceptions.user import USER_NOT_FOUND
-from model.view import UserInfo
+from model.view import UserView
 from schemas.user import UserUpdate
 from services.user import (
     get_user_by_id,
@@ -25,7 +25,7 @@ router = APIRouter(
 async def get_current(
     user_id: UserIdDep,
     session: SessionDep,
-) -> UserInfo:
+) -> UserView:
     return await get_user_by_id(
         user_id=user_id,
         session=session,
@@ -57,7 +57,7 @@ async def update_current(
 async def get_by_id(
     user_id: int,
     session: SessionDep,
-) -> UserInfo:
+) -> UserView:
     return await get_user_by_id(
         user_id=user_id,
         session=session,
@@ -72,7 +72,7 @@ async def get_by_id(
 async def get_by_username(
     username: str,
     session: SessionDep,
-) -> UserInfo:
+) -> UserView:
     return await get_by_username(
         username=username,
         session=session,

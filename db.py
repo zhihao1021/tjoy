@@ -3,7 +3,7 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
 from contextlib import asynccontextmanager
-from typing import Annotated, AsyncGenerator
+from typing import Annotated, AsyncGenerator, Optional
 
 from config import DB_URL
 
@@ -16,8 +16,18 @@ engine = create_async_engine(DB_URL, echo=True)
 
 
 @asynccontextmanager
-async def get_session() -> AsyncGenerator[AsyncSession, None]:
+async def get_session(exists_session: Optional[AsyncSession] = None) -> AsyncGenerator[AsyncSession, None]:
+    if exists_session is not None:
+        yield exists_session
+        return
+
     async with AsyncSession(engine) as session:
         yield session
 
-SessionDep = Annotated[AsyncSession, Depends(get_session)]
+
+# @asynccontextmanager
+async def __get_session() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSession(engine) as session:
+        yield session
+
+SessionDep = Annotated[AsyncSession, Depends(__get_session)]

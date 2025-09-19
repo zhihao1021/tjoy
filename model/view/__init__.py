@@ -1,1 +1,1 @@
-from .user_info import UserInfo
+from .user_view import UserView

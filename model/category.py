@@ -1,15 +1,15 @@
-from pydantic import BeforeValidator, Field, field_serializer
-from sqlalchemy import Boolean, ForeignKey, Integer, Text
+from pydantic import Field
+from sqlalchemy import Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from .base import IdBase, IdBaseModel
 from .relationships import follow_category_table
 
 if TYPE_CHECKING:
-    from .article import ArticleModel
-    from .user import UserModel
+    from .article import Article, ArticleModel
+    from .user import User, UserModel
 
 
 class CategoryModel(IdBase):
@@ -29,4 +29,23 @@ class CategoryModel(IdBase):
     followers: Mapped[list["UserModel"]] = relationship(
         secondary=follow_category_table,
         lazy=True,
+    )
+
+
+class Category(IdBaseModel[CategoryModel]):
+    name: str = Field(
+        title="Category Name",
+        description="The name of the category.",
+        examples=["Technology", "Health", "Sports"],
+    )
+    articles: list["Article"] = Field(
+        default_factory=list,
+        title="Articles",
+        description="List of articles under this category.",
+    )
+
+    followers: list["User"] = Field(
+        default_factory=list,
+        title="Followers",
+        description="List of users following this category.",
     )
