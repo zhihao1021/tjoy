@@ -43,7 +43,15 @@ class SnowflakeID():
     def __eq__(self, obj: Any) -> bool:
         if isinstance(obj, self.__class__):
             return self.value == obj.value
-        return False
+        if isinstance(obj, int):
+            return self.value == obj
+        if isinstance(obj, str):
+            return str(self.value) == obj
+        try:
+            other = int(obj)
+            return self.value == other
+        except:
+            return False
 
     def __hash__(self) -> int:
         return self.value
