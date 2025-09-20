@@ -12,6 +12,7 @@ from snowflake.snowflake import SnowflakeGenerator
 from model.user import UserModel
 from model.article import ArticleModel 
 from rabbitmq_service.sender import send_message
+from embedding_service.src.embedding import ActivityRecommendationSystemGemma
 
 router = APIRouter(
     prefix="/embedding",
@@ -96,21 +97,29 @@ async def get_recommended_users_for_event(event_id: int):
         users_result = await session.execute(users_sql)
         users_rows = users_result.fetchall()
 
-        activity_recommender.events_data = {
+
+        from embedding_service.src import activity_recommender
+        recommendation_system = activity_recommender
+        
+
+        recommendation_system.events_data = {
             f"event_{event_article.id}": event_article
         }
 
         recommended_users = []
-        threshold = 0.05
+        threshold = 0.02
+        total_users = len(users_rows)
+        
+        print(f"Processing {total_users} users for event {event_id}...")
 
-        for user_row in users_rows:
+        for i, user_row in enumerate(users_rows, 1):
             user_data = dict(user_row._mapping)
             user_model = UserModel(**user_data)
 
-            activity_recommender.set_user(user_model)
+            recommendation_system.set_user(user_model)
 
             try:
-                scores = activity_recommender.calculate_comprehensive_score(
+                scores = recommendation_system.calculate_comprehensive_score(
                     f"event_{event_article.id}"
                 )
                 total_score = scores["total_score"]
@@ -141,8 +150,13 @@ async def get_recommended_users_for_event(event_id: int):
                             },
                         }
                     )
+                    print(f"  ✓ User {user_data['id']} ({user_data['username']}): score {total_score:.4f}")
+                
+                if i % 10 == 0 or i == total_users:
+                    print(f"  Progress: {i}/{total_users} users processed")
+                    
             except Exception as e:
-                print(f"{user_data['id']} error: {e}")
+                print(f"  ✗ User {user_data['id']} error: {e}")
                 continue
 
         recommended_users.sort(key=lambda x: x["total_score"], reverse=True)
@@ -245,7 +259,7 @@ async def parsing(user_id: int):
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     print("API starting up...")
-    activity_recommender.load_model()
+    from embedding_service.src import activity_recommender
     app.state.recommendation_system = activity_recommender
 
     yield

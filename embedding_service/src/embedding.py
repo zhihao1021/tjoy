@@ -31,17 +31,28 @@ class ActivityRecommendationSystemGemma:
         """Loading EmbeddingGemma model"""
         try:
             print("Loading EmbeddingGemma model...")
-            start_time = time.time()
+            print(f"Model name: {self.model_name}")
             
-            self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-            
-            self.model = AutoModel.from_pretrained(self.model_name)
-            
+            # 設定設備
             if self.device == 'auto':
                 self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            print(f"Using device: {self.device}")
             
+            # 載入 tokenizer
+            print("Loading tokenizer...")
+            self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            print("Tokenizer loaded successfully")
+            
+            # 載入模型
+            print("Loading model...")
+            self.model = AutoModel.from_pretrained(self.model_name)
+            print("Model loaded successfully")
+            
+            # 移動到設備
+            print(f"Moving model to {self.device}...")
             self.model = self.model.to(self.device)
-            self.model.eval() 
+            self.model.eval()
+            print("Model loaded and ready!")
             
         except Exception as e:
             print(f"Model loading failed: {e}")
@@ -50,10 +61,8 @@ class ActivityRecommendationSystemGemma:
     def get_embedding(self, text: str) -> np.ndarray:
 
         if not self.model or not self.tokenizer:
-            raise ValueError("Model not loaded, please call load_model()")
-        
-        start_time = time.time()
-        
+            self.load_model()
+             
         try:
             inputs = self.tokenizer(
                 text, 
