@@ -13,7 +13,8 @@ from snowflake import SnowflakeGenerator
 from .utils import sign_jwt, UserIdDep
 
 router = APIRouter(
-    prefix="/auth"
+    prefix="/auth",
+    tags=["Authentication"]
 )
 
 id_generator = SnowflakeGenerator()
