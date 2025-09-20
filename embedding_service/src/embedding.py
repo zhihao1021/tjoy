@@ -6,7 +6,6 @@ from typing import List, Dict, Tuple, Set
 import time
 from model.user import UserModel
 from model.article import ArticleModel
-from db import engine
 
 class ActivityRecommendationSystemGemma:
     def __init__(self, model_name='sentence-transformers/all-MiniLM-L6-v2', device='auto'):
@@ -70,8 +69,6 @@ class ActivityRecommendationSystemGemma:
                 outputs = self.model(**inputs)
                 embedding = outputs.last_hidden_state.mean(dim=1)
                 embedding = embedding.cpu().numpy().flatten()
-            
-            encoding_time = time.time() - start_time
             
             return embedding
             

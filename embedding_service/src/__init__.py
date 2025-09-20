@@ -1,0 +1,2 @@
+from .embedding import ActivityRecommendationSystemGemma
+activity_recommender = ActivityRecommendationSystemGemma()

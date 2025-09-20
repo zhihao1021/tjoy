@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status, APIRouter, HTTPException
 from contextlib import asynccontextmanager
-from embedding_service.src.embedding import ActivityRecommendationSystemGemma
+from embedding_service.src import activity_recommender
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
@@ -10,12 +10,24 @@ import bcrypt
 from pydantic import BaseModel, Field
 from snowflake.snowflake import SnowflakeGenerator
 from model.user import UserModel
-from model.article import ArticleModel
+from model.article import ArticleModel 
+from rabbitmq_service.sender import send_message
 
 router = APIRouter(
     prefix="/embedding",
     tags=["Embedding"]
 )
+
+rabbitmq = APIRouter(
+    prefix="/rabbitmq",
+    tags=["rabbitmq"]
+)
+
+@router.post("/rabbitmq_test/{even_id}")
+async def rabbitmq_test(event_id:int):
+    message = {"event_id": event_id}
+    await send_message(message)
+    return {"status": "ok", "event_id": event_id}
 
 @router.get("/health")
 def health_check(response: Response):
@@ -34,7 +46,6 @@ async def get_recommended_users_for_event(event_id: int):
 
     from db import engine
     async with AsyncSession(engine) as session:
-        # 查詢單一活動資料
         event_sql = text(
             """
             SELECT a.id,
@@ -85,21 +96,21 @@ async def get_recommended_users_for_event(event_id: int):
         users_result = await session.execute(users_sql)
         users_rows = users_result.fetchall()
 
-        recommendation_system.events_data = {
+        activity_recommender.events_data = {
             f"event_{event_article.id}": event_article
         }
 
         recommended_users = []
-        threshold = 0.3
+        threshold = 0.05
 
         for user_row in users_rows:
             user_data = dict(user_row._mapping)
             user_model = UserModel(**user_data)
 
-            recommendation_system.set_user(user_model)
+            activity_recommender.set_user(user_model)
 
             try:
-                scores = recommendation_system.calculate_comprehensive_score(
+                scores = activity_recommender.calculate_comprehensive_score(
                     f"event_{event_article.id}"
                 )
                 total_score = scores["total_score"]
@@ -163,7 +174,7 @@ async def parsing(user_id: int):
 
         user_data = dict(user_row._mapping)
         user_model = UserModel(**user_data)
-        recommendation_system.set_user(user_model)
+        activity_recommender.set_user(user_model)
         events_sql = text(
             """
             SELECT a.id,
@@ -201,11 +212,11 @@ async def parsing(user_id: int):
                 author=user_model, 
             )
             article.category_name = event_data.get("category_name")
-            recommendation_system.add_event_data(f"event_{article.id}", article)
+            activity_recommender.add_event_data(f"event_{article.id}", article)
 
         print(events_rows)
 
-        recommended_events = recommendation_system.recommend_events()
+        recommended_events = activity_recommender.recommend_events()
         event_list = []
         for event in recommended_events:
             event_dict = {
@@ -229,13 +240,13 @@ async def parsing(user_id: int):
         }
 
 
-recommendation_system = ActivityRecommendationSystemGemma()
+
 
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     print("API starting up...")
-    recommendation_system.load_model()
-    app.state.recommendation_system = recommendation_system
+    activity_recommender.load_model()
+    app.state.recommendation_system = activity_recommender
 
     yield
 
