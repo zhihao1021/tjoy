@@ -7,7 +7,6 @@ from model.view import UserView
 from schemas.user import UserUpdate
 from services.user import (
     get_user_by_id,
-    get_user_by_username,
     update_user_by_id,
 )
 

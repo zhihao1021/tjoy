@@ -1,5 +1,5 @@
 from pydantic import BeforeValidator, Field, field_serializer
-from sqlalchemy import BigInteger, String, Text
+from sqlalchemy import BigInteger, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from typing import Annotated, TYPE_CHECKING, Union
@@ -50,6 +50,22 @@ class UserModel(IdBase):
     )
     department: Mapped[str] = mapped_column(
         Text
+    )
+    onboarding_year: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False
+    )
+    onboarding_month: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False
+    )
+    onboarding_day: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False
+    )
+    interest: Mapped[str] = mapped_column(
+        Text,
+        nullable=False
     )
 
     password_hash: Mapped[str] = mapped_column(
@@ -118,6 +134,33 @@ class User(IdBaseModel[UserModel]):
         title="Department",
         description="The department the user belongs to.",
         examples=["Computer Science"]
+    )
+    onboarding_year: int = Field(
+        title="Onboarding Year",
+        description="The year the user joined the institution.",
+        ge=1900,
+        le=2100,
+        examples=[2020, 2021, 2022],
+    )
+    onboarding_month: int = Field(
+        title="Onboarding Month",
+        description="The month the user joined the institution.",
+        ge=1,
+        le=12,
+        examples=[1, 2, 3],
+    )
+    onboarding_day: int = Field(
+        title="Onboarding Day",
+        description="The day the user joined the institution.",
+        ge=1,
+        le=31,
+        examples=[1, 15, 30],
+    )
+    interest: str = Field(
+        default="",
+        title="Interest",
+        description="The user's interests.",
+        examples=["Machine Learning, Data Science"]
     )
 
     password_hash: Annotated[Union[bytes, str], StrToBytesValidator] = Field(
