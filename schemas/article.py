@@ -5,7 +5,7 @@ from typing import Optional
 
 class ArticleCreate(BaseModel):
     author_visibility: int
-    category_id: str
+    category_id: int
     title: str
     content: str
     tags: str
