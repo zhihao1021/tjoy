@@ -61,7 +61,7 @@ class ArticleModel(IdBase):
         Boolean,
         nullable=False
     )
-    evnet_week_day: Mapped[Optional[int]] = mapped_column(
+    event_week_day: Mapped[Optional[int]] = mapped_column(
         Integer,
         nullable=True,
     )
