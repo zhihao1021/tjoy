@@ -2,8 +2,8 @@ import json
 import pandas as pd
 from pycirclize import Circos
 
-# 假設你已經計算好 avg_scores
-with open("fake_articles_db.json", "r", encoding="utf-8") as f:
+# 搜尋出來的json檔
+with open("articles.json", "r", encoding="utf-8") as f:
     db = json.load(f)
 records = db["records"]
 emotions = ["joy", "sadness", "anger", "fear", "surprise", "disgust"]

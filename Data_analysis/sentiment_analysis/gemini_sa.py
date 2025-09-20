@@ -7,8 +7,8 @@ import os
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel("gemini-2.5-pro")
 
-# 讀取原始 JSON
-with open("fake_articles_db.json", "r", encoding="utf-8") as f:
+# 搜尋出來的json檔
+with open("articles.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 prompt_template = """你是一個專業的多面向情緒分析系統。

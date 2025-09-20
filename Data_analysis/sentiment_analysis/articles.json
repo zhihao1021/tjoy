@@ -1,0 +1,883 @@
+{
+  "database": "ArticlesDB",
+  "created_at": "2025-09-20T00:40:00Z",
+  "description": "台積園區美食貼文與留言，含正向、負向與中性內容",
+  "records": [
+    {
+      "id": "food-301",
+      "board": "美食版",
+      "title": "外送咖啡灑了半杯",
+      "timestamp": "2025-04-02T08:30:00Z",
+      "content": "早上點外送咖啡結果杯蓋沒蓋好，衣服全是咖啡漬…心情瞬間down。",
+      "comments": [
+        {
+          "user": "lattefan",
+          "text": "遇過同樣情況超崩潰。"
+        },
+        {
+          "user": "kindbarista",
+          "text": "可以跟客服申訴退款。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.0,
+        "sadness": 0.8,
+        "anger": 0.7,
+        "fear": 0.0,
+        "surprise": 0.1,
+        "disgust": 0.4
+      }
+    },
+    {
+      "id": "food-302",
+      "board": "美食版",
+      "title": "宵夜炸物太油",
+      "timestamp": "2025-05-10T23:50:00Z",
+      "content": "昨天買的鹽酥雞整袋都是油，吃完胃超不舒服。",
+      "comments": [
+        {
+          "user": "healthconcern",
+          "text": "炸油太舊應該換了。"
+        },
+        {
+          "user": "greasealert",
+          "text": "那家我也踩雷過。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.0,
+        "sadness": 0.1,
+        "anger": 0.8,
+        "fear": 0.0,
+        "surprise": 0.1,
+        "disgust": 0.9
+      }
+    },
+    {
+      "id": "food-303",
+      "board": "美食版",
+      "title": "草莓塔驚喜",
+      "timestamp": "2025-03-28T15:20:00Z",
+      "content": "今天買到季節限定草莓塔，酸甜剛好超好吃！",
+      "comments": [
+        {
+          "user": "sweetqueen",
+          "text": "這家真的值得排隊。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.95,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.3,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-304",
+      "board": "美食版",
+      "title": "員工餐廳菜色一成不變",
+      "timestamp": "2025-06-03T12:00:00Z",
+      "content": "連續三天都是同樣的青菜和滷肉，吃到懷疑人生。",
+      "comments": [
+        {
+          "user": "canteencritic",
+          "text": "真的需要改進菜單。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.0,
+        "sadness": 0.2,
+        "anger": 0.7,
+        "fear": 0.0,
+        "surprise": 0.0,
+        "disgust": 0.6
+      }
+    },
+    {
+      "id": "food-305",
+      "board": "美食版",
+      "title": "夜市牛排排隊心得",
+      "timestamp": "2025-04-21T19:10:00Z",
+      "content": "排了40分鐘終於吃到夜市牛排，味道中規中矩但份量足。",
+      "comments": [
+        {
+          "user": "steaklover",
+          "text": "排隊太久就扣分了。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.6,
+        "sadness": 0.1,
+        "anger": 0.8,
+        "fear": 0.0,
+        "surprise": 0.0,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-306",
+      "board": "美食版",
+      "title": "拉麵鹹到爆",
+      "timestamp": "2025-07-09T20:45:00Z",
+      "content": "今天吃的豚骨拉麵鹹到我喝不下湯…",
+      "comments": [
+        {
+          "user": "noodleking",
+          "text": "可能廚師下鹽手滑。"
+        },
+        {
+          "user": "soupfan",
+          "text": "可以先跟店員反映。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.0,
+        "sadness": 0.5,
+        "anger": 0.6,
+        "fear": 0.0,
+        "surprise": 0.3,
+        "disgust": 0.8
+      }
+    },
+    {
+      "id": "food-307",
+      "board": "美食版",
+      "title": "自製便當小確幸",
+      "timestamp": "2025-05-14T07:40:00Z",
+      "content": "連續一週自己帶便當，省錢又安心。",
+      "comments": [
+        {
+          "user": "fitlife",
+          "text": "自己煮最放心。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.9,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.0,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-308",
+      "board": "美食版",
+      "title": "甜點外送超慢",
+      "timestamp": "2025-08-01T16:30:00Z",
+      "content": "訂的千層蛋糕等了一個半小時才到，冰淇淋都化了。",
+      "comments": [
+        {
+          "user": "dessertlover",
+          "text": "外送旺季真的要避開。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.05,
+        "sadness": 0.45,
+        "anger": 0.78,
+        "fear": 0.0,
+        "surprise": 0.15,
+        "disgust": 0.1
+      }
+    },
+    {
+      "id": "food-309",
+      "board": "美食版",
+      "title": "手沖咖啡初體驗",
+      "timestamp": "2025-06-22T10:10:00Z",
+      "content": "自己沖的耶加雪菲，香氣迷人，雖然手法生疏但很有成就感。",
+      "comments": [
+        {
+          "user": "brewcat",
+          "text": "下次試冰滴看看。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.9,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.1,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-310",
+      "board": "美食版",
+      "title": "夏季芒果冰天堂",
+      "timestamp": "2025-07-18T14:25:00Z",
+      "content": "園區附近那家芒果冰滿滿果肉，暑氣全消！",
+      "comments": [
+        {
+          "user": "mangoqueen",
+          "text": "必加煉乳更爽。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.95,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.1,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-311",
+      "board": "美食版",
+      "title": "壽司品質下滑",
+      "timestamp": "2025-08-20T18:00:00Z",
+      "content": "常去的平價壽司最近魚生有腥味，好失望。",
+      "comments": [
+        {
+          "user": "sushifan",
+          "text": "我上週也覺得不新鮮。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.05,
+        "sadness": 0.85,
+        "anger": 0.2,
+        "fear": 0.0,
+        "surprise": 0.15,
+        "disgust": 0.9
+      }
+    },
+    {
+      "id": "food-312",
+      "board": "美食版",
+      "title": "週末早午餐紀錄",
+      "timestamp": "2025-04-26T11:00:00Z",
+      "content": "跟朋友吃早午餐，班尼迪克蛋完美流心。",
+      "comments": [
+        {
+          "user": "brunchfan",
+          "text": "咖啡也很好喝。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.95,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.05,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-313",
+      "board": "美食版",
+      "title": "外送湯麵全灑",
+      "timestamp": "2025-09-03T12:40:00Z",
+      "content": "點的湯麵被外送員翻倒，打開只有乾麵，怒！",
+      "comments": [
+        {
+          "user": "angrydiner",
+          "text": "太誇張了吧。"
+        },
+        {
+          "user": "refund",
+          "text": "申訴一定要。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.0,
+        "sadness": 0.3,
+        "anger": 1.0,
+        "fear": 0.0,
+        "surprise": 0.7,
+        "disgust": 0.1
+      }
+    },
+    {
+      "id": "food-314",
+      "board": "美食版",
+      "title": "員工餐廳驚喜湯品",
+      "timestamp": "2025-07-30T12:20:00Z",
+      "content": "今天的麻油雞湯超香，喝到見底。",
+      "comments": [
+        {
+          "user": "soupqueen",
+          "text": "冬天喝更讚。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.9,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.1,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-315",
+      "board": "美食版",
+      "title": "冰淇淋價格暴漲",
+      "timestamp": "2025-06-08T15:10:00Z",
+      "content": "最愛的義式冰淇淋漲價到一球150元，有點吃不下手。",
+      "comments": [
+        {
+          "user": "walletcry",
+          "text": "真的貴到離譜。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.0,
+        "sadness": 0.2,
+        "anger": 0.9,
+        "fear": 0.0,
+        "surprise": 0.3,
+        "disgust": 0.7
+      }
+    },
+    {
+      "id": "food-316",
+      "board": "美食版",
+      "title": "自家烤肉小聚",
+      "timestamp": "2025-05-05T19:20:00Z",
+      "content": "週末在陽台烤肉，味噌豬五花大成功！",
+      "comments": [
+        {
+          "user": "grillmaster",
+          "text": "看照片就流口水。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.95,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.1,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-317",
+      "board": "美食版",
+      "title": "夜市攤位態度差",
+      "timestamp": "2025-08-11T20:30:00Z",
+      "content": "去夜市買雞排，老闆態度超差，直接翻白眼。",
+      "comments": [
+        {
+          "user": "servicefail",
+          "text": "下次別去那攤了。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.05,
+        "sadness": 0.3,
+        "anger": 0.85,
+        "fear": 0.0,
+        "surprise": 0.2,
+        "disgust": 0.75
+      }
+    },
+    {
+      "id": "food-318",
+      "board": "美食版",
+      "title": "深夜甜點日記",
+      "timestamp": "2025-07-24T22:00:00Z",
+      "content": "自己做了抹茶戚風，香氣滿室，超滿足。",
+      "comments": [
+        {
+          "user": "dessertfan",
+          "text": "手作甜點最療癒！"
+        }
+      ],
+      "emotions": {
+        "joy": 0.95,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.2,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-319",
+      "board": "美食版",
+      "title": "泰式餐廳踩雷",
+      "timestamp": "2025-09-12T19:10:00Z",
+      "content": "新開的泰式餐廳太油又死鹹，還收服務費…不會再去。",
+      "comments": [
+        {
+          "user": "spicefail",
+          "text": "感謝避雷分享。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.6,
+        "sadness": 0.3,
+        "anger": 0.85,
+        "fear": 0.0,
+        "surprise": 0.25,
+        "disgust": 0.9
+      }
+    },
+    {
+      "id": "food-320",
+      "board": "美食版",
+      "title": "秋季南瓜濃湯暖心",
+      "timestamp": "2025-09-15T17:50:00Z",
+      "content": "自己熬的南瓜濃湯配麵包，暖胃又暖心。",
+      "comments": [
+        {
+          "user": "pumpkinking",
+          "text": "加肉桂粉更香。"
+        }
+      ],
+      "emotions": {
+        "joy": 0.95,
+        "sadness": 0.0,
+        "anger": 0.0,
+        "fear": 0.0,
+        "surprise": 0.0,
+        "disgust": 0.0
+      }
+    },
+    {
+      "id": "food-321",
+      "board": "美食版",
+      "title": "晨間豆漿暖胃",
+      "timestamp": "2025-03-31T07:30:00Z",
+      "content": "上班前喝到現磨溫熱豆漿，濃醇香超滿足。",
+      "comments": [
+        { "user": "soyfan", "text": "豆漿配燒餅才是靈魂組合！" }
+      ],
+      "emotions": { "joy": 0.9, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-322",
+      "board": "美食版",
+      "title": "便當店驚見頭髮",
+      "timestamp": "2025-04-05T12:15:00Z",
+      "content": "買的排骨便當裡竟然有長髮，瞬間沒食慾。",
+      "comments": [
+        { "user": "ewalert", "text": "這一定要客訴！" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.4, "anger": 0.9, "fear": 0.1, "surprise": 0.5, "disgust": 0.95 }
+    },
+    {
+      "id": "food-323",
+      "board": "美食版",
+      "title": "辦公室水果日",
+      "timestamp": "2025-04-08T15:40:00Z",
+      "content": "公司發的奇異果超甜，下午茶幸福感滿分。",
+      "comments": [
+        { "user": "fruitlover", "text": "辦公室福利好讚！" }
+      ],
+      "emotions": { "joy": 0.92, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-324",
+      "board": "美食版",
+      "title": "拉麵店服務爆雷",
+      "timestamp": "2025-04-11T19:00:00Z",
+      "content": "排隊20分鐘後店員態度超差，直接影響食慾。",
+      "comments": [
+        { "user": "ramenrage", "text": "服務差比食物難吃更扣分。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.3, "anger": 0.85, "fear": 0.0, "surprise": 0.2, "disgust": 0.7 }
+    },
+    {
+      "id": "food-325",
+      "board": "美食版",
+      "title": "深夜烤地瓜",
+      "timestamp": "2025-04-14T22:10:00Z",
+      "content": "便利商店新出的蜜烤地瓜香甜又鬆軟。",
+      "comments": [
+        { "user": "sweetnight", "text": "夜宵神物！" }
+      ],
+      "emotions": { "joy": 0.88, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.15, "disgust": 0.0 }
+    },
+    {
+      "id": "food-326",
+      "board": "美食版",
+      "title": "咖哩飯微辣剛好",
+      "timestamp": "2025-04-17T13:20:00Z",
+      "content": "新開咖哩店辣度剛好，香料層次豐富。",
+      "comments": [
+        { "user": "currylove", "text": "想試試看中辣版！" }
+      ],
+      "emotions": { "joy": 0.9, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-327",
+      "board": "美食版",
+      "title": "抹茶拿鐵初體驗",
+      "timestamp": "2025-04-24T09:00:00Z",
+      "content": "朋友推薦的新抹茶拿鐵，奶香與茶香完美平衡。",
+      "comments": [
+        { "user": "matchafan", "text": "看照片就想喝！" }
+      ],
+      "emotions": { "joy": 0.93, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-328",
+      "board": "美食版",
+      "title": "滷味攤油膩",
+      "timestamp": "2025-04-27T21:30:00Z",
+      "content": "晚餐買滷味結果油浮一層，吃完嘴巴超膩。",
+      "comments": [
+        { "user": "oilalert", "text": "真的要換老闆了。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.2, "anger": 0.7, "fear": 0.0, "surprise": 0.1, "disgust": 0.85 }
+    },
+    {
+      "id": "food-329",
+      "board": "美食版",
+      "title": "手作布朗尼",
+      "timestamp": "2025-05-02T16:10:00Z",
+      "content": "第一次烤布朗尼成功，巧克力香濃到不行！",
+      "comments": [
+        { "user": "baker", "text": "自製最有成就感！" }
+      ],
+      "emotions": { "joy": 0.95, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.15, "disgust": 0.0 }
+    },
+    {
+      "id": "food-330",
+      "board": "美食版",
+      "title": "早餐店蛋餅焦了",
+      "timestamp": "2025-05-07T07:50:00Z",
+      "content": "今天蛋餅整片焦黑，口感全毀。",
+      "comments": [
+        { "user": "breakfastfail", "text": "下次換一家吧。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.4, "anger": 0.8, "fear": 0.0, "surprise": 0.3, "disgust": 0.6 }
+    },
+    {
+      "id": "food-331",
+      "board": "美食版",
+      "title": "同事請喝珍奶",
+      "timestamp": "2025-05-11T15:00:00Z",
+      "content": "下午同事突然請客珍奶，超驚喜！",
+      "comments": [
+        { "user": "bobalove", "text": "同事好暖！" }
+      ],
+      "emotions": { "joy": 0.96, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.25, "disgust": 0.0 }
+    },
+    {
+      "id": "food-332",
+      "board": "美食版",
+      "title": "壽喜燒吃到飽",
+      "timestamp": "2025-05-18T18:40:00Z",
+      "content": "好友聚餐壽喜燒肉質超好，CP值高。",
+      "comments": [
+        { "user": "sukiyaki", "text": "肉多才爽！" }
+      ],
+      "emotions": { "joy": 0.94, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-333",
+      "board": "美食版",
+      "title": "便利商店三明治驚嚇",
+      "timestamp": "2025-05-21T07:10:00Z",
+      "content": "買到過期的三明治，幸好看日期有發現。",
+      "comments": [
+        { "user": "qcalert", "text": "店員應該注意保鮮期！" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.2, "anger": 0.8, "fear": 0.1, "surprise": 0.4, "disgust": 0.7 }
+    },
+    {
+      "id": "food-334",
+      "board": "美食版",
+      "title": "深夜牛肉湯暖心",
+      "timestamp": "2025-05-25T23:50:00Z",
+      "content": "夜市牛肉湯熱騰騰，宵夜好選擇。",
+      "comments": [
+        { "user": "beefbroth", "text": "半夜喝最讚！" }
+      ],
+      "emotions": { "joy": 0.9, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-335",
+      "board": "美食版",
+      "title": "咖啡店Wi-Fi超慢",
+      "timestamp": "2025-05-29T14:00:00Z",
+      "content": "環境不錯但網路爆慢，辦公直接失敗。",
+      "comments": [
+        { "user": "netfail", "text": "我上次也差點崩潰。" }
+      ],
+      "emotions": { "joy": 0.1, "sadness": 0.3, "anger": 0.7, "fear": 0.0, "surprise": 0.1, "disgust": 0.4 }
+    },
+    {
+      "id": "food-336",
+      "board": "美食版",
+      "title": "香草冰淇淋自製",
+      "timestamp": "2025-06-01T16:30:00Z",
+      "content": "週末自製香草冰淇淋，大成功！",
+      "comments": [
+        { "user": "icecreamfan", "text": "好想吃～" }
+      ],
+      "emotions": { "joy": 0.95, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-337",
+      "board": "美食版",
+      "title": "外送披薩延遲",
+      "timestamp": "2025-06-04T19:10:00Z",
+      "content": "披薩等了一小時，起司都冷了。",
+      "comments": [
+        { "user": "pizzalover", "text": "最近外送都慢。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.3, "anger": 0.8, "fear": 0.0, "surprise": 0.2, "disgust": 0.3 }
+    },
+    {
+      "id": "food-338",
+      "board": "美食版",
+      "title": "夏日檸檬塔",
+      "timestamp": "2025-06-12T13:50:00Z",
+      "content": "酸甜檸檬塔冰涼解暑，幸福感爆棚。",
+      "comments": [
+        { "user": "lemonfan", "text": "好適合夏天！" }
+      ],
+      "emotions": { "joy": 0.94, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-339",
+      "board": "美食版",
+      "title": "麵包店漲價",
+      "timestamp": "2025-06-15T08:10:00Z",
+      "content": "平常買的可頌漲價兩成，有點心痛。",
+      "comments": [
+        { "user": "breadlover", "text": "最近都在漲…" }
+      ],
+      "emotions": { "joy": 0.1, "sadness": 0.3, "anger": 0.7, "fear": 0.0, "surprise": 0.2, "disgust": 0.4 }
+    },
+    {
+      "id": "food-340",
+      "board": "美食版",
+      "title": "深夜手沖咖啡",
+      "timestamp": "2025-06-19T21:20:00Z",
+      "content": "自己煮的手沖香氣撲鼻，夜讀好夥伴。",
+      "comments": [
+        { "user": "nightbrew", "text": "太懂生活了！" }
+      ],
+      "emotions": { "joy": 0.9, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-341",
+      "board": "美食版",
+      "title": "新開義大利麵店踩雷",
+      "timestamp": "2025-06-25T18:30:00Z",
+      "content": "麵體過熟醬汁淡，失望。",
+      "comments": [
+        { "user": "pastafail", "text": "不會再去。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.4, "anger": 0.7, "fear": 0.0, "surprise": 0.2, "disgust": 0.6 }
+    },
+    {
+      "id": "food-342",
+      "board": "美食版",
+      "title": "晚霞野餐",
+      "timestamp": "2025-07-01T17:00:00Z",
+      "content": "河濱公園野餐，夕陽下吃三明治超浪漫。",
+      "comments": [
+        { "user": "sunsetpicnic", "text": "畫面太美！" }
+      ],
+      "emotions": { "joy": 0.95, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-343",
+      "board": "美食版",
+      "title": "早餐蘿蔔糕焦香",
+      "timestamp": "2025-07-05T08:20:00Z",
+      "content": "外脆內軟的蘿蔔糕，一早就幸福。",
+      "comments": [
+        { "user": "radishfan", "text": "加辣醬更讚！" }
+      ],
+      "emotions": { "joy": 0.93, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-344",
+      "board": "美食版",
+      "title": "宵夜泡麵太鹹",
+      "timestamp": "2025-07-12T23:30:00Z",
+      "content": "泡麵湯頭鹹到爆，喝兩口就放棄。",
+      "comments": [
+        { "user": "noodlenight", "text": "要自己加水稀釋。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.3, "anger": 0.6, "fear": 0.0, "surprise": 0.2, "disgust": 0.7 }
+    },
+    {
+      "id": "food-345",
+      "board": "美食版",
+      "title": "仲夏西瓜冰沙",
+      "timestamp": "2025-07-15T15:10:00Z",
+      "content": "路邊攤的現打西瓜冰沙超解暑，甜而不膩。",
+      "comments": [
+        { "user": "watermelonfan", "text": "加一點薄荷更清爽！" }
+      ],
+      "emotions": { "joy": 0.95, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-346",
+      "board": "美食版",
+      "title": "炸物攤油煙味超重",
+      "timestamp": "2025-07-18T20:40:00Z",
+      "content": "經過夜市炸物攤整身油煙味，下次要換路線。",
+      "comments": [
+        { "user": "smokefail", "text": "衣服洗兩次才淡！" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.2, "anger": 0.6, "fear": 0.0, "surprise": 0.1, "disgust": 0.8 }
+    },
+    {
+      "id": "food-347",
+      "board": "美食版",
+      "title": "老街豆花綿密",
+      "timestamp": "2025-07-21T14:25:00Z",
+      "content": "假日去老街吃豆花，花生與湯汁完美搭配。",
+      "comments": [
+        { "user": "tofulover", "text": "傳統味最讚！" }
+      ],
+      "emotions": { "joy": 0.93, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.15, "disgust": 0.0 }
+    },
+    {
+      "id": "food-348",
+      "board": "美食版",
+      "title": "外帶披薩潤餅化",
+      "timestamp": "2025-07-24T18:10:00Z",
+      "content": "外帶披薩回家時餅皮被蒸氣弄得濕軟，好可惜。",
+      "comments": [
+        { "user": "pizzafail", "text": "要打洞散熱才不會濕。" }
+      ],
+      "emotions": { "joy": 0.1, "sadness": 0.4, "anger": 0.6, "fear": 0.0, "surprise": 0.2, "disgust": 0.5 }
+    },
+    {
+      "id": "food-349",
+      "board": "美食版",
+      "title": "早晨可麗露驚喜",
+      "timestamp": "2025-07-27T08:00:00Z",
+      "content": "同事帶的法式可麗露外脆內嫩，完美開始。",
+      "comments": [
+        { "user": "frenchdessert", "text": "好想吃！" }
+      ],
+      "emotions": { "joy": 0.96, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-350",
+      "board": "美食版",
+      "title": "鹹酥雞等太久",
+      "timestamp": "2025-07-30T19:30:00Z",
+      "content": "排隊等了 45 分鐘才拿到鹹酥雞，肚子餓到不行。",
+      "comments": [
+        { "user": "waitlong", "text": "這家每次都要排爆久。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.3, "anger": 0.7, "fear": 0.0, "surprise": 0.2, "disgust": 0.4 }
+    },
+    {
+      "id": "food-351",
+      "board": "美食版",
+      "title": "海鹽焦糖拿鐵",
+      "timestamp": "2025-08-02T09:15:00Z",
+      "content": "新上市的海鹽焦糖拿鐵鹹甜交錯，好喝！",
+      "comments": [
+        { "user": "caramellove", "text": "聽起來超讚，下次去試。" }
+      ],
+      "emotions": { "joy": 0.94, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.15, "disgust": 0.0 }
+    },
+    {
+      "id": "food-352",
+      "board": "美食版",
+      "title": "生魚片不新鮮",
+      "timestamp": "2025-08-05T19:40:00Z",
+      "content": "晚餐的生魚片有腥味，吃到一半放下筷子。",
+      "comments": [
+        { "user": "fishfail", "text": "食材不新鮮真的NG。" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.5, "anger": 0.7, "fear": 0.1, "surprise": 0.3, "disgust": 0.9 }
+    },
+    {
+      "id": "food-353",
+      "board": "美食版",
+      "title": "芋頭西米露",
+      "timestamp": "2025-08-08T16:00:00Z",
+      "content": "冰涼的芋頭西米露，夏季甜點首選。",
+      "comments": [
+        { "user": "taroqueen", "text": "芋頭控必喝！" }
+      ],
+      "emotions": { "joy": 0.95, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-354",
+      "board": "美食版",
+      "title": "夜市章魚燒太糊",
+      "timestamp": "2025-08-11T21:45:00Z",
+      "content": "章魚燒外皮糊掉，口感不佳。",
+      "comments": [
+        { "user": "takofail", "text": "這家品質不穩定。" }
+      ],
+      "emotions": { "joy": 0.1, "sadness": 0.3, "anger": 0.6, "fear": 0.0, "surprise": 0.2, "disgust": 0.5 }
+    },
+    {
+      "id": "food-355",
+      "board": "美食版",
+      "title": "清晨手作三明治",
+      "timestamp": "2025-08-14T07:50:00Z",
+      "content": "自己準備的火腿蛋三明治，早餐超滿足。",
+      "comments": [
+        { "user": "breakfastlover", "text": "手作最安心！" }
+      ],
+      "emotions": { "joy": 0.96, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.1, "disgust": 0.0 }
+    },
+    {
+      "id": "food-356",
+      "board": "美食版",
+      "title": "外送湯圓翻覆",
+      "timestamp": "2025-08-17T18:20:00Z",
+      "content": "外送湯圓整碗打翻，只剩殘湯超傻眼。",
+      "comments": [
+        { "user": "dessertfail", "text": "外送員要小心啊！" }
+      ],
+      "emotions": { "joy": 0.0, "sadness": 0.4, "anger": 0.8, "fear": 0.0, "surprise": 0.5, "disgust": 0.4 }
+    },
+    {
+      "id": "food-357",
+      "board": "美食版",
+      "title": "青醬義大利麵驚艷",
+      "timestamp": "2025-08-20T12:10:00Z",
+      "content": "剛開幕的義式餐廳青醬香氣十足。",
+      "comments": [
+        { "user": "pestofan", "text": "青醬控不能錯過！" }
+      ],
+      "emotions": { "joy": 0.92, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.2, "disgust": 0.0 }
+    },
+    {
+      "id": "food-358",
+      "board": "美食版",
+      "title": "紅豆餅爆漿燙口",
+      "timestamp": "2025-08-23T17:30:00Z",
+      "content": "剛出爐紅豆餅餡太燙，差點燙到舌頭。",
+      "comments": [
+        { "user": "beanlover", "text": "要吹涼一點再咬！" }
+      ],
+      "emotions": { "joy": 0.5, "sadness": 0.0, "anger": 0.0, "fear": 0.2, "surprise": 0.3, "disgust": 0.0 }
+    },
+    {
+      "id": "food-359",
+      "board": "美食版",
+      "title": "深夜涼麵清爽",
+      "timestamp": "2025-08-26T22:00:00Z",
+      "content": "宵夜涼麵佐麻醬，夏夜必備。",
+      "comments": [
+        { "user": "noodlenight", "text": "天氣熱就想吃這味。" }
+      ],
+      "emotions": { "joy": 0.94, "sadness": 0.0, "anger": 0.0, "fear": 0.0, "surprise": 0.15, "disgust": 0.0 }
+    },
+    {
+      "id": "food-360",
+      "board": "美食版",
+      "title": "烤玉米醬料偏甜",
+      "timestamp": "2025-08-29T19:15:00Z",
+      "content": "夜市烤玉米刷的醬太甜，吃兩口就膩了。",
+      "comments": [
+        { "user": "cornfan", "text": "下次要點微甜版。" }
+      ],
+      "emotions": { "joy": 0.1, "sadness": 0.2, "anger": 0.5, "fear": 0.0, "surprise": 0.1, "disgust": 0.6 }
+    }
+  ]
+}
