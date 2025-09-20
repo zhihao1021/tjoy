@@ -14,6 +14,7 @@ from ..user import UserModel
 
 
 class ArticleView(BaseModel):
+    id: str
     author_id: Optional[str] = None
     author_name: str
     category_id: Optional[str] = None
@@ -35,7 +36,6 @@ class ArticleView(BaseModel):
         model: ArticleModel,
         session: Optional[AsyncSession] = None
     ) -> Self:
-
         async with get_session(session) as session:
             auhtor_id = None
             author_name = ""
@@ -96,6 +96,7 @@ class ArticleView(BaseModel):
                 interest_count, join_count = result
 
         return cls(
+            id=str(model.id),
             author_id=str(auhtor_id) if auhtor_id is not None else None,
             author_name=author_name,
             category_id=str(category_id) if category_id else None,

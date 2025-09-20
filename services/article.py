@@ -6,17 +6,21 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Literal, Optional
 
 from db import get_session
-from model import Article, ArticleModel
-from model.view import ArticleView
+from exceptions.article import CREATE_ARTICLE_ERROR
+from model import ArticleModel
 from schemas.article import ArticleCreate
+from snowflake import SnowflakeGenerator
 
 from .category import check_category_exists
+
+id_generator = SnowflakeGenerator()
 
 
 async def create_article(
     author_id: int,
     data: ArticleCreate,
-    session: Optional[AsyncSession]
+    session: Optional[AsyncSession],
+    commit: bool = True
 ) -> ArticleModel:
     async with get_session(session) as session:
         category_exists = await check_category_exists(
@@ -31,23 +35,22 @@ async def create_article(
             )
 
         article = ArticleModel(
+            id=id_generator.next_id(),
             author_id=author_id,
             category_id=int(data.category_id),
             **data.model_dump(exclude={"category_id"})
         )
 
-        session.add(article)
+        if commit:
+            session.add(article)
 
-        try:
-            await session.commit()
-        except:
-            await session.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Failed to create article."
-            )
+            try:
+                await session.commit()
+            except:
+                await session.rollback()
+                raise CREATE_ARTICLE_ERROR
 
-        await session.refresh(article)
+            await session.refresh(article)
 
         return article
 

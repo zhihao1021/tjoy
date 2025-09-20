@@ -6,6 +6,7 @@ from typing import Annotated, Literal, Optional
 
 from auth import UserIdDep
 from db import SessionDep
+from exceptions.article import CREATE_ARTICLE_ERROR
 from model.view import ArticleView
 from schemas.article import ArticleCreate
 from services.article import (
@@ -85,6 +86,42 @@ async def create(
         model=article,
         session=session
     )
+
+
+@router.post(
+    path="/bulk",
+    description="Create articles in once"
+)
+async def create_bulk(
+    user_id: UserIdDep,
+    data: list[ArticleCreate],
+    session: SessionDep
+) -> list[ArticleView]:
+    articles = await gather(*[create_article(
+        author_id=user_id,
+        data=d,
+        session=session
+    ) for d in data])
+
+    try:
+        await session.commit()
+
+        await gather(*[
+            session.refresh(article)
+            for article in articles
+        ])
+    except:
+        await session.rollback()
+        raise CREATE_ARTICLE_ERROR
+
+    # TODO: Check Activity or pure Article
+    # TODO: send activity_id to RabbitMQ
+    # await send_message_to_rabbitmq(insert_activity_id_here)
+
+    return await gather(*[ArticleView.from_model(
+        model=article,
+        session=session
+    ) for article in articles])
 
 
 @router.put(
