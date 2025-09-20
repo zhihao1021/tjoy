@@ -36,6 +36,23 @@ class UserView(BaseModel):
         )
 
     @classmethod
+    def from_model(
+        cls,
+        model: UserModel
+    ) -> Self:
+        return cls(
+            id=SnowflakeID(model.id),
+            username=model.username,
+            display_name=model.display_name,
+            gender=model.gender,
+            department=model.department,
+            onboarding_year=model.onboarding_year,
+            onboarding_month=model.onboarding_month,
+            onboarding_day=model.onboarding_day,
+            interest=model.interest,
+        )
+
+    @classmethod
     def __cvt_from_results(cls, results: Row) -> Self:
         return cls(
             id=SnowflakeID(results[0]),

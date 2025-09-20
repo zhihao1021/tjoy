@@ -24,7 +24,6 @@ class ArticleModel(IdBase):
     )
     author: Mapped["UserModel"] = relationship(
         back_populates="articles",
-        lazy=True,
     )
     author_visibility: Mapped[int] = mapped_column(
         Integer,
@@ -38,7 +37,6 @@ class ArticleModel(IdBase):
     )
     category: Mapped[Optional["CategoryModel"]] = relationship(
         back_populates="articles",
-        lazy=True,
     )
 
     title: Mapped[str] = mapped_column(
@@ -80,20 +78,16 @@ class ArticleModel(IdBase):
     )
     event_conversation: Mapped[Optional["ConversationModel"]] = relationship(
         back_populates="event",
-        lazy=True,
     )
 
     comments: Mapped[list["CommentModel"]] = relationship(
         back_populates="article",
-        lazy=True,
     )
     interest_users: Mapped[list["UserModel"]] = relationship(
         secondary=interest_table,
-        lazy=True,
     )
     join_users: Mapped[list["UserModel"]] = relationship(
         secondary=join_event_table,
-        lazy=True,
     )
 
 

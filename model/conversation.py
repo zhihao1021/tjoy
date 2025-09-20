@@ -29,17 +29,14 @@ class ConversationModel(IdBase):
 
     event: Mapped[Optional["ArticleModel"]] = relationship(
         back_populates="event_conversation",
-        lazy=True,
     )
 
     messages: Mapped[list["MessageModel"]] = relationship(
         back_populates="conversation",
-        lazy=True,
     )
 
     users: Mapped[list["UserModel"]] = relationship(
         secondary=conversation_user_table,
-        lazy=True,
     )
 
 

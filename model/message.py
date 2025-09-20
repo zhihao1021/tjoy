@@ -18,9 +18,7 @@ class MessageModel(IdBase):
         ForeignKey("users.id"),
         nullable=False,
     )
-    author: Mapped["UserModel"] = relationship(
-        lazy=True,
-    )
+    author: Mapped["UserModel"] = relationship()
 
     conversation_id: Mapped[int] = mapped_column(
         ForeignKey("conversations.id"),
@@ -29,7 +27,6 @@ class MessageModel(IdBase):
     )
     conversation: Mapped["ConversationModel"] = relationship(
         back_populates="messages",
-        lazy=True,
     )
 
     context: Mapped[str] = mapped_column(

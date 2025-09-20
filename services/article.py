@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status
 from sqlalchemy import select
+from sqlalchemy.orm import joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from typing import Literal, Optional
@@ -53,7 +54,9 @@ async def create_article(
 
 async def get_all_articles(
     type: Optional[Literal["follow", "event"]] = None,
-    session: Optional[AsyncSession] = None
+    session: Optional[AsyncSession] = None,
+    fetch_author: bool = False,
+    fetch_category: bool = False,
 ) -> list[ArticleModel]:
     async with get_session(session) as session:
         stat = select(ArticleModel)
@@ -62,6 +65,11 @@ async def get_all_articles(
         elif type == "event":
             stat = stat.where(ArticleModel.is_event == True)
 
+        if fetch_author:
+            stat = stat.options(joinedload(ArticleModel.author))
+        if fetch_category:
+            stat = stat.options(joinedload(ArticleModel.category))
+
         result = await session.execute(stat)
 
         return list(result.scalars().all())
@@ -69,10 +77,22 @@ async def get_all_articles(
 
 async def get_article_by_id(
     article_id: int,
-    session: Optional[AsyncSession] = None
+    session: Optional[AsyncSession] = None,
+    fetch_author: bool = False,
+    fetch_category: bool = False,
 ) -> ArticleModel:
     async with get_session(session) as session:
-        article = await session.get(ArticleModel, article_id)
+        options = []
+        if fetch_author:
+            options.append(joinedload(ArticleModel.author))
+        if fetch_category:
+            options.append(joinedload(ArticleModel.category))
+
+        article = await session.get(
+            ArticleModel,
+            article_id,
+            options=options
+        )
 
         if article is None:
             raise HTTPException(

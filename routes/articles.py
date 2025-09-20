@@ -32,7 +32,12 @@ async def list_articles(
 ) -> list[ArticleView]:
     return await gather(*[
         ArticleView.from_model(model=article, session=session)
-        for article in await get_all_articles()
+        for article in await get_all_articles(
+            type=type,
+            session=session,
+            fetch_author=True,
+            fetch_category=True
+        )
     ])
 
 
@@ -46,7 +51,9 @@ async def get_article(
 ) -> ArticleView:
     article = await get_article_by_id(
         article_id=article_id,
-        session=session
+        session=session,
+        fetch_author=True,
+        fetch_category=True,
     )
 
     return await ArticleView.from_model(

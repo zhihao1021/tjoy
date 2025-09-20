@@ -23,12 +23,10 @@ class CategoryModel(IdBase):
     )
     articles: Mapped[list["ArticleModel"]] = relationship(
         back_populates="category",
-        lazy=True,
     )
 
     followers: Mapped[list["UserModel"]] = relationship(
         secondary=follow_category_table,
-        lazy=True,
     )
 
 

@@ -25,7 +25,6 @@ class SearchHistoryModel(IdBase):
     )
     user: Mapped["UserModel"] = relationship(
         back_populates="search_histories",
-        lazy=True,
     )
 
 

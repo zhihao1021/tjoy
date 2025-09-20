@@ -10,6 +10,7 @@ from .user_view import UserView
 from ..article import ArticleModel
 from ..category import CategoryModel
 from ..relationships import interest_table, join_event_table
+from ..user import UserModel
 
 
 class ArticleView(BaseModel):
@@ -34,25 +35,46 @@ class ArticleView(BaseModel):
         model: ArticleModel,
         session: Optional[AsyncSession] = None
     ) -> Self:
-        auhtor_id = None
-        author_name = ""
-        if model.author_visibility == 0:
-            author_name = "匿名"
-        else:
-            author = model.author
-            auhtor_id = author.id
-            if model.author_visibility == 0b10:
-                author_name = author.department
-            elif model.author_visibility == 0b01:
-                author_name = author.display_name
-            else:
-                author_name = f"{author.department} {author.display_name}"
 
         async with get_session(session) as session:
-            category = await session.get(
-                CategoryModel,
-                model.category_id
-            ) if model.category_id else None
+            auhtor_id = None
+            author_name = ""
+            if model.author_visibility == 0:
+                author_name = "匿名"
+            else:
+                author_id = model.author_id
+
+                try:
+                    author = model.author
+                except:
+                    author = await session.get(
+                        UserModel,
+                        author_id
+                    ) if author_id else None
+
+                if author is None:
+                    author_name = "未知用户"
+                else:
+                    if model.author_visibility == 0b10:
+                        author_name = author.department
+                    elif model.author_visibility == 0b01:
+                        author_name = author.display_name
+                    else:
+                        author_name = f"{author.department} {author.display_name}"
+
+            category_id = model.category_id
+            category_name = None
+            try:
+                if model.category:
+                    category_name = model.category.name
+            except:
+                category = await session.get(
+                    CategoryModel,
+                    model.category_id
+                ) if model.category_id else None
+
+                if category:
+                    category_name = category.name
 
             interest_count = 0
             join_count = 0
@@ -76,8 +98,8 @@ class ArticleView(BaseModel):
         return cls(
             author_id=str(auhtor_id) if auhtor_id is not None else None,
             author_name=author_name,
-            category_id=str(category.id) if category else None,
-            category_name=category.name if category else None,
+            category_id=str(category_id) if category_id else None,
+            category_name=category_name,
             title=model.title,
             content=model.content,
             tags=model.tags,

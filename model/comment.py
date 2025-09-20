@@ -21,7 +21,6 @@ class CommentModel(IdBase):
     )
     article: Mapped["ArticleModel"] = relationship(
         back_populates="comments",
-        lazy=True,
     )
 
     author_id: Mapped[int] = mapped_column(
@@ -31,7 +30,6 @@ class CommentModel(IdBase):
     )
     author: Mapped["UserModel"] = relationship(
         back_populates="comments",
-        lazy=True,
     )
 
     content: Mapped[str] = mapped_column(

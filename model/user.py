@@ -75,42 +75,33 @@ class UserModel(IdBase):
 
     articles: Mapped[list["ArticleModel"]] = relationship(
         back_populates="author",
-        lazy=True,
     )
     comments: Mapped[list["CommentModel"]] = relationship(
         back_populates="author",
-        lazy=True,
     )
 
     interest_articles: Mapped[list["ArticleModel"]] = relationship(
         secondary=interest_table,
-        lazy=True,
     )
     join_events: Mapped[list["ArticleModel"]] = relationship(
         secondary=join_event_table,
-        lazy=True,
     )
     follow_categories: Mapped[list["CategoryModel"]] = relationship(
         secondary=follow_category_table,
-        lazy=True,
     )
     conversations: Mapped[list["ConversationModel"]] = relationship(
         secondary=conversation_user_table,
-        lazy=True,
     )
     search_histories: Mapped[list["SearchHistoryModel"]] = relationship(
         back_populates="user",
-        lazy=True,
     )
     article_histories: Mapped[list["ArticleModel"]] = relationship(
         secondary="article_histories",
-        lazy=True,
     )
     friends: Mapped[list["UserModel"]] = relationship(
         secondary=friend_table,
         primaryjoin=id == friend_table.c.user_id,
         secondaryjoin=id == friend_table.c.friend_id,
-        lazy=True,
     )
 
 
