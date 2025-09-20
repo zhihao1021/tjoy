@@ -1,5 +1,5 @@
 from pydantic import Field
-from sqlalchemy import Text
+from sqlalchemy import Boolean, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from typing import Optional, TYPE_CHECKING
@@ -19,6 +19,12 @@ class ConversationModel(IdBase):
     title: Mapped[str] = mapped_column(
         Text,
         nullable=False,
+    )
+
+    is_private: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
     )
 
     event: Mapped[Optional["ArticleModel"]] = relationship(
@@ -41,6 +47,12 @@ class Conversation(IdBaseModel[ConversationModel]):
     title: str = Field(
         title="Conversation Title",
         description="The title of the conversation.",
+    )
+
+    is_private: bool = Field(
+        default=False,
+        title="Is Private",
+        description="Indicates if the conversation is private.",
     )
 
     event: Optional["Article"] = Field(
