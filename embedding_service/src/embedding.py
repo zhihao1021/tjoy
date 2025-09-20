@@ -20,11 +20,11 @@ class ActivityRecommendationSystemGemma:
         
         # Weight settings
         self.weights = {
-            'interest_tags': 0.3,
-            'subscribed_boards': 0.2,
-            'browsing_history': 0.2,
-            'engagement_history': 0.2,
-            'search_keywords': 0.1
+            'content_similarity': 0.25,    # 內容相似度
+            'tag_similarity': 0.25,        # 標籤相似度
+            'board_similarity': 0.2,       # 看板相似度
+            'behavioral_similarity': 0.2,  # 行為相似度
+            'search_relevance': 0.1        # 搜尋相關度
         }
         
     def load_model(self):
@@ -119,39 +119,78 @@ class ActivityRecommendationSystemGemma:
         # Collect all text data
         text_parts = []
         
-        # 1. Basic data
+        # 1. Basic user information
         text_parts.append(user_model.display_name)
         if user_model.department:
             text_parts.append(user_model.department)
+        if user_model.gender:
+            text_parts.append(user_model.gender)
         
-        # 2. Interest article tags
+        # 2. Interest article tags and content
         if user_model.interest_articles:
             interest_tags = []
+            interest_titles = []
             for article in user_model.interest_articles:
                 if article.tags:
                     interest_tags.extend(article.tags.split(','))
+                if article.title:
+                    interest_titles.append(article.title)
             if interest_tags:
                 text_parts.append(" ".join(interest_tags))
+            if interest_titles:
+                text_parts.append(" ".join(interest_titles))
         
         # 3. Followed categories
         if user_model.follow_categories:
             category_names = [cat.name for cat in user_model.follow_categories]
             text_parts.append(" ".join(category_names))
         
-        # 4. Browsing history (article title)
+        # 4. Browsing history (article titles and tags)
         if user_model.article_histories:
-            history_titles = [article.title for article in user_model.article_histories]
-            text_parts.append(" ".join(history_titles))
+            history_titles = []
+            history_tags = []
+            for article in user_model.article_histories:
+                if article.title:
+                    history_titles.append(article.title)
+                if article.tags:
+                    history_tags.extend(article.tags.split(','))
+            if history_titles:
+                text_parts.append(" ".join(history_titles))
+            if history_tags:
+                text_parts.append(" ".join(history_tags))
         
         # 5. Search history
         if user_model.search_histories:
             search_queries = [history.query for history in user_model.search_histories]
             text_parts.append(" ".join(search_queries))
         
-        # 6. Joined events
+        # 6. Joined events (titles and tags)
         if user_model.join_events:
-            event_titles = [event.title for event in user_model.join_events]
-            text_parts.append(" ".join(event_titles))
+            event_titles = []
+            event_tags = []
+            for event in user_model.join_events:
+                if event.title:
+                    event_titles.append(event.title)
+                if event.tags:
+                    event_tags.extend(event.tags.split(','))
+            if event_titles:
+                text_parts.append(" ".join(event_titles))
+            if event_tags:
+                text_parts.append(" ".join(event_tags))
+        
+        # 7. User's own articles (if any)
+        if user_model.articles:
+            own_article_titles = []
+            own_article_tags = []
+            for article in user_model.articles:
+                if article.title:
+                    own_article_titles.append(article.title)
+                if article.tags:
+                    own_article_tags.extend(article.tags.split(','))
+            if own_article_titles:
+                text_parts.append(" ".join(own_article_titles))
+            if own_article_tags:
+                text_parts.append(" ".join(own_article_tags))
         
         # Merge all text
         combined_text = " ".join(text_parts)
@@ -266,17 +305,41 @@ class ActivityRecommendationSystemGemma:
         # Collect user historical behavior text
         behavioral_texts = []
         
-        # Browsing history (article title)
+        # Browsing history (article titles and tags)
         if user_model.article_histories:
-            behavioral_texts.extend([article.title for article in user_model.article_histories])
+            for article in user_model.article_histories:
+                if article.title:
+                    behavioral_texts.append(article.title)
+                if article.tags:
+                    behavioral_texts.extend(article.tags.split(','))
         
         # Search history
         if user_model.search_histories:
             behavioral_texts.extend([history.query for history in user_model.search_histories])
         
-        # Joined events
+        # Joined events (titles and tags)
         if user_model.join_events:
-            behavioral_texts.extend([event.title for event in user_model.join_events])
+            for event in user_model.join_events:
+                if event.title:
+                    behavioral_texts.append(event.title)
+                if event.tags:
+                    behavioral_texts.extend(event.tags.split(','))
+        
+        # Interest articles (titles and tags)
+        if user_model.interest_articles:
+            for article in user_model.interest_articles:
+                if article.title:
+                    behavioral_texts.append(article.title)
+                if article.tags:
+                    behavioral_texts.extend(article.tags.split(','))
+        
+        # User's own articles (titles and tags)
+        if user_model.articles:
+            for article in user_model.articles:
+                if article.title:
+                    behavioral_texts.append(article.title)
+                if article.tags:
+                    behavioral_texts.extend(article.tags.split(','))
         
         if not behavioral_texts:
             return 0.0
@@ -340,11 +403,11 @@ class ActivityRecommendationSystemGemma:
         
         # Calculate weighted total score
         total_score = (
-            scores['content_similarity'] * self.weights['interest_tags'] +
-            scores['tag_similarity'] * self.weights['interest_tags'] +
-            scores['board_similarity'] * self.weights['subscribed_boards'] +
-            scores['behavioral_similarity'] * self.weights['browsing_history'] +
-            scores['search_relevance'] * self.weights['search_keywords']
+            scores['content_similarity'] * self.weights['content_similarity'] +
+            scores['tag_similarity'] * self.weights['tag_similarity'] +
+            scores['board_similarity'] * self.weights['board_similarity'] +
+            scores['behavioral_similarity'] * self.weights['behavioral_similarity'] +
+            scores['search_relevance'] * self.weights['search_relevance']
         )
         
         scores['total_score'] = total_score

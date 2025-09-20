@@ -12,4 +12,4 @@ else:
     with open(private_key_file) as f:
         PRIVATE_KEY = f.read()
 
-DB_URL = getenv("DB_URL", "sqlite+aiosqlite:///./test.db")
+DB_URL = getenv("DB_URL", "postgresql+asyncpg://mchack:mchack@172.16.2.12:5432/mchack-dev")
