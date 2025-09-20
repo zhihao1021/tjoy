@@ -2,8 +2,12 @@ from pydantic import BaseModel, Field
 from sqlalchemy import BigInteger
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from typing import cast, Generic, Self, TypeVar
-from types import get_original_bases
+from typing import Any, cast, Generic, Self, TypeVar
+try:
+    from types import get_original_bases
+except ImportError:
+    def get_original_bases(cls: type, /) -> tuple[Any, ...]:
+        return cls.__dict__.get("__orig_bases__", cls.__bases__)
 
 from db import Base
 from snowflake import SnowflakeID
