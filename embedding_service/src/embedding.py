@@ -6,6 +6,7 @@ from typing import List, Dict, Tuple, Set
 import time
 from model.user import UserModel
 from model.article import ArticleModel
+from db import engine
 
 class ActivityRecommendationSystemGemma:
     def __init__(self, model_name='sentence-transformers/all-MiniLM-L6-v2', device='auto'):
@@ -414,7 +415,7 @@ class ActivityRecommendationSystemGemma:
         
         return scores
     
-    def recommend_events(self, min_score: float = 0.4) -> List[ArticleModel]:
+    def recommend_events(self, min_score: float = 0.5) -> List[ArticleModel]:
         """
         Recommend events with score above threshold, return event model list
         
@@ -434,14 +435,14 @@ class ActivityRecommendationSystemGemma:
         
         for event_id in self.events_data.keys():
             scores = self.calculate_comprehensive_score(event_id)
-            if scores['total_score'] > min_score:
+            print(event_id, scores)
+            if scores['content_similarity'] > min_score:
                 recommendations.append((event_id, scores['total_score']))
         
-        # Sort by total score (descending)
         recommendations.sort(key=lambda x: x[1], reverse=True)
-        
-        # Return event model list
-        return [self.events_data[event_id] for event_id, _ in recommendations]
+        recommendations_list = [self.events_data[event_id] for event_id, _ in recommendations]
+        self.events_data.clear()
+        return recommendations_list
 
 def main():
     """Main program - Demonstrate EmbeddingGemma recommendation system usage"""
