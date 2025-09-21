@@ -78,7 +78,8 @@ async def create(
         session=session
     )
 
-    await send_message_to_rabbitmq(str(article.id))
+    if (article.is_event):
+        await send_message_to_rabbitmq(str(article.id))
 
     return await ArticleView.from_model(
         model=article,
