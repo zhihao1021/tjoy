@@ -1,4 +1,4 @@
-# TCard Backend
+# tJoy Backend
 
 ## Start up command
 ```bash
