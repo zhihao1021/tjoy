@@ -4,7 +4,7 @@ from embedding_service.src import activity_recommender
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
-from db import SessionDep
+from db import async_session
 from typing import Dict, Any, Optional
 import bcrypt
 from pydantic import BaseModel, Field
@@ -46,7 +46,7 @@ def health_check(response: Response):
 async def get_recommended_users_for_event(event_id: int):
 
     from db import engine
-    async with AsyncSession(engine) as session:
+    async with async_session() as session:
         event_sql = text(
             """
             SELECT a.id,
