@@ -6,6 +6,5 @@ from
 
 @pytest.mark.asyncio
 async def test_send_message_to_rabbitmq():
-    # TODO
     pass
     
