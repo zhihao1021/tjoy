@@ -22,7 +22,7 @@ router = APIRouter(
 )
 
 
-@router.get("/")
+@router.get("")
 async def get_conversations(
     user_id: UserIdDep,
     session: SessionDep,

@@ -7,7 +7,7 @@ router = APIRouter(
 
 
 @router.get(
-    path="/",
+    path="",
     description="Search"
 )
 async def search(query: str):

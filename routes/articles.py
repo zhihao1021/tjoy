@@ -22,7 +22,7 @@ router = APIRouter(
 
 
 @router.get(
-    path="/",
+    path="",
     description="List articles with optional filtering by type."
 )
 async def list_articles(
@@ -64,7 +64,7 @@ async def get_article(
 
 
 @router.post(
-    path="/",
+    path="",
     description="Create a new article."
 )
 async def create(

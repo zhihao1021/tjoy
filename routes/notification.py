@@ -7,7 +7,7 @@ router = APIRouter(
 
 
 @router.get(
-    path="/",
+    path="",
     description="Get notifications for the authenticated user."
 )
 async def get_notifications():

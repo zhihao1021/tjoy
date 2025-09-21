@@ -18,7 +18,7 @@ router = APIRouter(
 
 
 @router.get(
-    path="/",
+    path="",
     description="Get a list of friends for the authenticated user."
 )
 async def get_friends(
