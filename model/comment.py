@@ -1,5 +1,5 @@
 from pydantic import Field
-from sqlalchemy import ForeignKey, Text
+from sqlalchemy import ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from typing import TYPE_CHECKING
@@ -31,6 +31,10 @@ class CommentModel(IdBase):
     author: Mapped["UserModel"] = relationship(
         back_populates="comments",
     )
+    author_visibility: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+    )
 
     content: Mapped[str] = mapped_column(
         Text,
@@ -55,6 +59,13 @@ class Comment(IdBaseModel[CommentModel]):
     author: "User" = Field(
         title="Author",
         description="The user who authored the comment.",
+    )
+    author_visibility: int = Field(
+        title="Author Visibility",
+        description="Visibility level of the author's information.",
+        ge=0,
+        le=3,
+        examples=[0, 1, 2, 3],
     )
 
     content: str = Field(
