@@ -78,7 +78,7 @@ async def create(
         session=session
     )
 
-    await send_message_to_rabbitmq(article.id)
+    await send_message_to_rabbitmq(str(article.id))
 
     return await ArticleView.from_model(
         model=article,
@@ -111,10 +111,6 @@ async def create_bulk(
     except:
         await session.rollback()
         raise CREATE_ARTICLE_ERROR
-
-    # TODO: Check Activity or pure Article
-    # TODO: send activity_id to RabbitMQ
-    # await send_message_to_rabbitmq(insert_activity_id_here)
 
     return await gather(*[ArticleView.from_model(
         model=article,

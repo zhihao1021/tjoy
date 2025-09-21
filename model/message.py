@@ -18,7 +18,9 @@ class MessageModel(IdBase):
         ForeignKey("users.id"),
         nullable=False,
     )
-    author: Mapped["UserModel"] = relationship()
+    author: Mapped["UserModel"] = relationship(
+        lazy="joined"
+    )
 
     conversation_id: Mapped[int] = mapped_column(
         ForeignKey("conversations.id"),
@@ -32,6 +34,11 @@ class MessageModel(IdBase):
     context: Mapped[str] = mapped_column(
         Text,
         nullable=False,
+    )
+
+    translated_context: Mapped[str] = mapped_column(
+        Text,
+        nullable=True,
     )
 
 
@@ -56,4 +63,8 @@ class Message(IdBaseModel[MessageModel]):
     context: str = Field(
         title="Message Content",
         description="The content of the message.",
+    )
+    translated_context: str = Field(
+        title="Translated Content",
+        description="The translated content of the message, if available.",
     )

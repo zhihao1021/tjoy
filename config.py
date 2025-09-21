@@ -13,3 +13,4 @@ else:
         PRIVATE_KEY = f.read()
 
 DB_URL = getenv("DB_URL", "sqlite+aiosqlite:///./test.db")
+TRANSLATER_API_KEY = getenv("TRANSLATER_API_KEY", "")
