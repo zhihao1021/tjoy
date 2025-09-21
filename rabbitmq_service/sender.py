@@ -1,10 +1,12 @@
 import os
 import asyncio
+from orjson import dumps
 from aio_pika import connect_robust, Message, DeliveryMode
 
 # Done: remember to change localhost to right RabbitMQ host
 RABBITMQ_URL = os.getenv("RABBITMQ_URL", "amqp://guest:guest@localhost/")
 RABBITMQ_QUEUE_NAME = os.getenv("QUEUE_NAME", "matchmaking-queue")
+
 
 async def send_message_to_rabbitmq(activity_id: str):
     try:
@@ -17,7 +19,7 @@ async def send_message_to_rabbitmq(activity_id: str):
             )
             await channel.default_exchange.publish(
                 Message(
-                    body=activity_id.encode(),
+                    body=dumps({"event_id": activity_id}),
                     delivery_mode=DeliveryMode.PERSISTENT
                 ),
                 routing_key=queue.name
