@@ -37,20 +37,18 @@ class ArticleView(BaseModel):
         session: Optional[AsyncSession] = None
     ) -> Self:
         async with get_session(session) as session:
-            auhtor_id = None
+            author_id = None
             author_name = ""
             if model.author_visibility == 0:
                 author_name = "匿名"
             else:
-                author_id = model.author_id
-
                 try:
                     author = model.author
                 except:
                     author = await session.get(
                         UserModel,
-                        author_id
-                    ) if author_id else None
+                        model.author_id
+                    ) if model.author_id else None
 
                 if author is None:
                     author_name = "未知用户"
@@ -58,8 +56,10 @@ class ArticleView(BaseModel):
                     if model.author_visibility == 0b10:
                         author_name = author.department
                     elif model.author_visibility == 0b01:
+                        author_id = model.author_id
                         author_name = author.display_name
                     else:
+                        author_id = model.author_id
                         author_name = f"{author.department} {author.display_name}"
 
             category_id = model.category_id
@@ -97,7 +97,7 @@ class ArticleView(BaseModel):
 
         return cls(
             id=str(model.id),
-            author_id=str(auhtor_id) if auhtor_id is not None else None,
+            author_id=str(author_id) if author_id is not None else None,
             author_name=author_name,
             category_id=str(category_id) if category_id else None,
             category_name=category_name,
