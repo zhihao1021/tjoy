@@ -44,10 +44,10 @@ async def on_message(message: aio_pika.IncomingMessage):
 
             print(f"{YELLOW}[Processing]{RESET}: Starting recommendation calculation...")
             result = await get_recommended_users_for_event(int(event_id))
-            print(result)
             print(f"{GREEN}[Success]{RESET}: Recommendation calculation completed")
             print(f"{CYAN}[Result]{RESET}: Found {result.get('total_recommended_users', 0)} recommended users")
             print(f"{CYAN}[Result]{RESET}: Event: {result.get('event_title', 'N/A')}")
+
 
         except Exception as e:
             print(f"{RED}[Error]{RESET}: Processing error: {e}")

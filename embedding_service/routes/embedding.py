@@ -24,6 +24,18 @@ rabbitmq = APIRouter(
     tags=["rabbitmq"]
 )
 
+async def update_recommend(user_id: int, event_id: int):
+    async with async_session() as session:
+        await session.execute(
+            text("""
+                INSERT INTO recommend (user_id, event_id)
+                VALUES (:uid, :eid)
+                ON CONFLICT (user_id, event_id) DO NOTHING
+            """),
+            {"uid": user_id, "eid": event_id}
+        )
+        await session.commit()
+
 @router.post("/rabbitmq_test/{even_id}")
 async def rabbitmq_test(event_id:int):
     message = {"event_id": event_id}
@@ -160,6 +172,11 @@ async def get_recommended_users_for_event(event_id: int):
                 continue
 
         recommended_users.sort(key=lambda x: x["total_score"], reverse=True)
+        
+        for u in recommended_users:
+            await update_recommend(u["user_id"], event_id) 
+            print(f"[Database(Recommend Table)]: User {u['display_name']} update completed.")
+        
         return {
             "event_id": event_id,
             "event_title": event_data["title"],
@@ -242,7 +259,8 @@ async def parsing(user_id: int):
                 "author": event.author.display_name if event.author else None,
             }
             event_list.append(event_dict)
-
+        
+        
         return {
             "user_id": user_data["id"],
             "username": user_data["username"],
