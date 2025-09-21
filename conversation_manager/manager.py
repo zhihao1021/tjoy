@@ -75,21 +75,24 @@ class ConversationManager:
                 await session.rollback()
                 return
 
-            async def func(user_id: int, ws: WebSocket) -> None:
-                if ws.client_state != WebSocketState.CONNECTED:
-                    await self.disconnect(
-                        ws=ws,
-                        user_id=user_id,
-                        conversation_id=conversation_id
-                    )
-                    return
+            async def func(user_id: int) -> None:
+                async def __func(ws: WebSocket) -> None:
+                    if ws.client_state != WebSocketState.CONNECTED:
+                        await self.disconnect(
+                            ws=ws,
+                            user_id=user_id,
+                            conversation_id=conversation_id
+                        )
+                        return
 
-                await ws.send_bytes(dumps(
-                    MessageView.from_model(message_data).model_dump()
-                ))
+                    await ws.send_bytes(dumps(
+                        MessageView.from_model(message_data).model_dump()
+                    ))
+
+                await gather(*[__func(ws) for ws in self.user_ws[user_id]])
 
             await gather(*[
-                func(user_id, ws) for ws in self.user_ws[user_id]
+                func(user_id)
                 for user_id in conversation_user_ids
                 if self.user_ws.get(user_id) is not None
             ])

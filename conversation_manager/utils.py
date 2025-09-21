@@ -124,10 +124,15 @@ async def get_messages_by_conversation_id(
     session: Optional[AsyncSession] = None
 ) -> list[MessageModel]:
     async with get_session(session) as session:
+        await get_conversation_by_id(
+            conversation_id=conversation_id,
+            user_id=user_id,
+            session=session
+        )
+
         messages = await session.execute(select(
             MessageModel
         ).where(
-            MessageModel.author_id == user_id,
             MessageModel.conversation_id == conversation_id,
         ).order_by(
             MessageModel.id.asc()
