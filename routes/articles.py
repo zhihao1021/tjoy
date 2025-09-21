@@ -78,9 +78,7 @@ async def create(
         session=session
     )
 
-    # TODO: Check Activity or pure Article
-    # TODO: send activity_id to RabbitMQ
-    # await send_message_to_rabbitmq(insert_activity_id_here)
+    await send_message_to_rabbitmq(article.id)
 
     return await ArticleView.from_model(
         model=article,
